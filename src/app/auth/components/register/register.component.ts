@@ -1,5 +1,7 @@
 import {Component} from '@angular/core'
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms'
+import { Store } from '@ngrx/store'
+import { register } from '../../store/action'
 
 @Component({
   selector: 'mc-register',
@@ -13,9 +15,12 @@ export class RegisterComponent {
     email: ['', Validators.required],
     password: ['', Validators.required],
   })
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private store: Store) {
+
+  }
 
   onSubmit() {
     console.log('form', this.form.getRawValue())
+    this.store.dispatch(register())
   }
 }
